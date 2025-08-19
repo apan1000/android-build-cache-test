@@ -13,13 +13,13 @@ jobs:
       - name: ⬇️ Checkout repository
         uses: actions/checkout@v4
 
-      - name: ⚙️ Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: "17.x"
-          cache: 'gradle'
-        id: java
+#      - name: ⚙️ Setup Java
+#        uses: actions/setup-java@v4
+#        with:
+#          distribution: 'temurin'
+#          java-version: "17.x"
+#          cache: 'gradle'
+#        id: java
 
       - name: ⚙️ Setup Flutter
         uses: subosito/flutter-action@v2
@@ -28,13 +28,19 @@ jobs:
           cache: true
         id: flutter
 
+      - name: Check cache before
+        run: |
+          echo "Gradle cache file count and total size:"
+          find ~/.gradle/caches -type f | wc -l
+          du -sh ~/.gradle/caches
+
       - name: 📦 Install dependencies
         run: flutter pub get
 
       - name: 🤖📦 Create Android
         run: flutter build appbundle --verbose --release -t lib/main.dart
 
-      - name: Check cache
+      - name: Check cache after
         run: |
           echo "Gradle cache file count and total size:"
           find ~/.gradle/caches -type f | wc -l
