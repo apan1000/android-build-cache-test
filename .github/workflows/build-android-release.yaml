@@ -13,13 +13,13 @@ jobs:
       - name: ⬇️ Checkout repository
         uses: actions/checkout@v4
 
-#      - name: ⚙️ Setup Java
-#        uses: actions/setup-java@v4
-#        with:
-#          distribution: 'temurin'
-#          java-version: "17.x"
-#          cache: 'gradle'
-#        id: java
+      - name: ⚙️ Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: "17.x"
+          cache: 'gradle'
+        id: java
 
       - name: ⚙️ Setup Flutter
         uses: subosito/flutter-action@v2
